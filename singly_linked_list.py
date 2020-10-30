@@ -41,7 +41,7 @@ class SinglyLinkedList:
         previous_node = current_node
 
         # iterate until the last tracker node is the tail
-        while(current_node._next is not None):
+        while current_node._next is not None:
             previous_node = current_node
             current_node = current_node._next
 
@@ -49,9 +49,18 @@ class SinglyLinkedList:
         previous_node._next = None
         self.length -= 1
 
+    def find(self, data):
+        current_node = self.head
+        while current_node is not None:
+            if current_node._data == data:
+                return True
+            current_node = current_node._next
+
+        return False
+
     def print(self):
         current_node = self.head
-        while(current_node is not None):
+        while current_node is not None:
             print(current_node._data)
             current_node = current_node._next
         print('--------------')
