@@ -58,6 +58,31 @@ class SinglyLinkedList:
 
         return False
 
+    def delete(self, data):
+        if self.length == 0:
+            return
+        # define two tracker nodes
+        current_node = self.head
+        previous_node = current_node
+
+        # iterate until the current node is equal to the requested deletion
+        while current_node is not None:
+            if current_node._data == data:
+                self.length -= 1
+                previous_node._next = current_node._next
+                return
+            previous_node = current_node
+            current_node = current_node._next
+
+    def reverse(self):
+        reversed_list = SinglyLinkedList()
+        current_node = self.head
+        while current_node is not None:
+            reversed_list.prepend(current_node._data)
+            current_node = current_node._next
+
+        return reversed_list
+
     def print(self):
         current_node = self.head
         while current_node is not None:

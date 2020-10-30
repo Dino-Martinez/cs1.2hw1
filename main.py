@@ -16,6 +16,15 @@ test_list.delete_from_head()
 test_list.delete_from_tail()
 test_list.print()
 
+# test general delete
+test_list.delete("SHINE")
+test_list.print()
+
 # test find
 print(test_list.find("Dennis"))
 print(test_list.find("Not in it"))
+print("------------")
+
+# test reverse
+reversed_list = test_list.reverse()
+reversed_list.print()
