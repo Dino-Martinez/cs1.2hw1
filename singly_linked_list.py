@@ -26,8 +26,32 @@ class SinglyLinkedList:
         self.tail = new_node
         self.length += 1
 
+    def delete_from_head(self):
+        if self.length == 0:
+            return
+        self.head = self.head._next
+        self.length -= 1
+
+    def delete_from_tail(self):
+        if self.length == 0:
+            return
+
+        # define two tracker nodes
+        current_node = self.head
+        previous_node = current_node
+
+        # iterate until the last tracker node is the tail
+        while(current_node._next is not None):
+            previous_node = current_node
+            current_node = current_node._next
+
+        # set next for node before tail to none
+        previous_node._next = None
+        self.length -= 1
+
     def print(self):
         current_node = self.head
         while(current_node is not None):
             print(current_node._data)
             current_node = current_node._next
+        print('--------------')
