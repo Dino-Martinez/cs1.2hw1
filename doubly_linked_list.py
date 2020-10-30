@@ -1,21 +1,24 @@
-from node import SingleNode
+from node import DoubleNode
+from singly_linked_list import SinglyLinkedList
 
 
-class SinglyLinkedList:
+class DoublyLinkedList(SinglyLinkedList):
     def __init__(self):
         self.head = None
         self.tail = None
         self.length = 0
 
     def prepend(self, data):
-        new_node = SingleNode(data, self.head)
+        new_node = DoubleNode(data, self.head, None)
+        if self.length != 0:
+            self.head._prev = new_node
+        else:
+            self.tail = new_node
         self.head = new_node
-        if self.length == 0:
-            self.tail = self.head
         self.length += 1
 
     def append(self, data):
-        new_node = SingleNode(data, None)
+        new_node = DoubleNode(data, None, self.tail)
         if self.length != 0:
             self.tail._next = new_node
         else:
@@ -27,6 +30,7 @@ class SinglyLinkedList:
         if self.length == 0:
             return
         self.head = self.head._next
+        self.head._prev = None
         self.length -= 1
 
     def delete_from_tail(self):
@@ -48,11 +52,11 @@ class SinglyLinkedList:
         self.length -= 1
 
     def find(self, data):
-        current_node = self.head
+        current_node = self.tail
         while current_node is not None:
             if current_node._data == data:
                 return True
-            current_node = current_node._next
+            current_node = current_node._prev
 
         return False
 
@@ -68,16 +72,17 @@ class SinglyLinkedList:
             if current_node._data == data:
                 self.length -= 1
                 previous_node._next = current_node._next
+                current_node._next._prev = previous_node
                 return
             previous_node = current_node
             current_node = current_node._next
 
     def reverse(self):
-        reversed_list = SinglyLinkedList()
-        current_node = self.head
+        reversed_list = DoublyLinkedList()
+        current_node = self.tail
         while current_node is not None:
-            reversed_list.prepend(current_node._data)
-            current_node = current_node._next
+            reversed_list.append(current_node._data)
+            current_node = current_node._prev
 
         return reversed_list
 

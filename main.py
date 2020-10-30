@@ -1,7 +1,11 @@
 # This file will utilize and test my Linked List classes
 from singly_linked_list import SinglyLinkedList
+from doubly_linked_list import DoublyLinkedList
 
+# swap out which line is commented to run tests for that data structure
 test_list = SinglyLinkedList()
+# test_list = DoublyLinkedList()
+
 # test append and prepend
 test_list.append("SHINE")
 test_list.prepend("Blinding Lights")
